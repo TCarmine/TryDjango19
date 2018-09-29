@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Blog</title>
+</head>
+<body>
+  <h1>{{title}} is working</h1>
+  {% for obj in object_list  %}<br>
+      {{ obj.title  }}<br>
+      {{ obj.content }}<br>
+      {{ obj.timestamp }}<br>
+      {{ obj.updated }}<br>
+      {{ obj.id }}<br>
+  {% endfor %}
+</body>
+</html>
