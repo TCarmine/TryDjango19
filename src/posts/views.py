@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from .models import Post
 # Create your views here.
@@ -23,12 +23,15 @@ def  post_list(request):
     #     }
     return render(request,"index.html",context)
 
-def  post_detail(request):
+def  post_detail(request, id):
+    # instance = Post.objects.get(id=1)
+    instance = get_object_or_404(Post, id=id)
     context={
-    "title":"Detail"
+    "title": instance.title,
+    "instance": instance,
     }
 
-    return render(request,"index.html",context)
+    return render(request,"post_detail.html",context)
 
 
 def  post_update(request):
