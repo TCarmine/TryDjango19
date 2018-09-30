@@ -12,9 +12,9 @@ post_delete,
 # ^ beginning string,$ end string, so a URL string need to be
 # exactly matched if between those 2
 urlpatterns = [
-    url(r'^$',        "posts.views.post_list"),
+    url(r'^$', post_list, name='list'),
     url(r'^create/$',  "posts.views.post_create"),
     url(r'^(?P<id>\d+)/$', post_detail, name='detail'),
     url(r'^(?P<id>\d+)/edit/$', post_update, name='update'),
-    url(r'^delete/$', "posts.views.post_delete"),
+    url(r'^(?P<id>\d+)/delete/$', post_delete, name='delete'),
 ]
