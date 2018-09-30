@@ -8,12 +8,13 @@
 </head>
 <body>
   <h1>{{title}} is working</h1>
-  {% for obj in object_list  %}<br>
-      {{ obj.title  }}<br>
-      {{ obj.content }}<br>
-      {{ obj.timestamp }}<br>
-      {{ obj.updated }}<br>
-      {{ obj.id }}<br>
+ <<a href='{% url "detail" id=obj.id %}'></a><br/>
+  {% for obj in object_list  %}<br/>
+      {{ obj.title  }}<br/>
+      {{ obj.content }}<br/>
+      {{ obj.timestamp }}<br/>
+      {{ obj.updated }}<br/>
+      {{ obj.id }}<br/>
   {% endfor %}
 </body>
 </html>
