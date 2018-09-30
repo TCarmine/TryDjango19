@@ -9,6 +9,8 @@
 <body>
   <h1>Form</h1>
 <form  method='POST' action=''>
+  {# is validating data in term of security before sent it to DB #} 
+    {% csrf_token %}
     {{ form.as_p }}
     <input type='submit' value='Create Post'/>
 </form>
