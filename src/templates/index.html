@@ -8,7 +8,7 @@
 </head>
 <body>
   <h1>{{title}} is working</h1>
-  {#      <a href='{% url "detail" id=obj.id %}'></a><br/> #}
+  {#      <a href='{% url "posts:detail" id=obj.id %}'></a><br/> #}
   {% for obj in object_list  %}<br/>
   <a href='{{ obj.get_absolute_url }}'>link</a><br/>
       {{ obj.title  }}<br/>

@@ -20,4 +20,4 @@ class Post(models.Model):
     #for better serving url
     def get_absolute_url(self):
         # return "/posts/%s/" %(self.id)
-         return reverse("detail", kwargs={"id": self.id})
+         return reverse("posts:detail", kwargs={"id": self.id})
