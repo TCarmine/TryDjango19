@@ -11,17 +11,17 @@ def  post_create(request):
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
-        messages.success(request,"Post successful created")
+        messages.success(request, "Post successful created")
         return HttpResponseRedirect(instance.get_absolute_url())
     else:
-        messages.error(request,"Post not created")
-        #return the form just created
-        # add a message that say the object "form" was created
+        messages.error(request, "Post not created")
+         #return the form just created
+         # add a message that say the object "form" was created
     context = {
         "form": form,
     }
 
-    return render(request, "post_form.html",context)
+    return render(request, "post_form.html", context)
 
 def  post_list(request):
     queryset = Post.objects.all()
@@ -53,23 +53,20 @@ def  post_detail(request, id):
 def  post_update(request, id=None):
     # instance = Post.objects.get(id=1)
     instance = get_object_or_404(Post, id=id)
-    form = PostForm(request.POST or None, instance = instance )
+    form = PostForm(request.POST or None, instance = instance)
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
-        messages.success(request,"Post successful saved")
+        messages.success(request,"<a href='#'>Post</a> Saved", extra_tags='html_safe')
         return HttpResponseRedirect(instance.get_absolute_url())
-    else:
-        messages.error(request,"Post not saved, check data validity")
-        # add a message that say the object "form" was edited
 
     context={
-    "title": instance.title,
-    "instance": instance,
-    "form":form,
+        "title": instance.title,
+        "instance": instance,
+        "form":form,
     }
 
-    return render(request,"post_form.html",context)
+    return render(request,"post_form.html", context)
 
 def  post_delete(request, id=None):
     instance = get_object_or_404(Post, id=id)
