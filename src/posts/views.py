@@ -71,7 +71,7 @@ def  post_update(request, id=None):
 
     return render(request,"post_form.html",context)
 
-def  post_delete(request):
+def  post_delete(request, id=None):
     instance = get_object_or_404(Post, id=id)
     instance.delete()
     messages.success(request,"Post successful deleted")
