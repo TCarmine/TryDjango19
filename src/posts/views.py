@@ -37,7 +37,7 @@ def  post_list(request):
     #     context={
     #     "title":"List"
     #     }
-    return render(request,"base.html",context)
+    return render(request,"post_list.html",context)
 
 def  post_detail(request, id):
     # instance = Post.objects.get(id=1)
