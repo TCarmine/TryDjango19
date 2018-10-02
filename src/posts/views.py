@@ -13,10 +13,6 @@ def  post_create(request):
         instance.save()
         messages.success(request, "Post successful created")
         return HttpResponseRedirect(instance.get_absolute_url())
-    else:
-        messages.error(request, "Post not created")
-         #return the form just created
-         # add a message that say the object "form" was created
     context = {
         "form": form,
     }
