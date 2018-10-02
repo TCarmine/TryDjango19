@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "base.html"}
 {% block content %}
 
@@ -6,10 +7,24 @@
 {% for obj in object_list  %}<br/>
 <a href='{{ obj.get_absolute_url }}'>link</a><br/>
     {{ obj.title  }}<br/>
+=======
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{title}} is working</h1>
+{#  this is a comment in django template    <a href='{% url "posts:detail" id=obj.id %}'></a><br/> #}
+{% for obj in object_list  %}<br/>
+<a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a><br/>
+>>>>>>> fixed_delete_view
     {{ obj.content }}<br/>
     {{ obj.timestamp }}<br/>
     {{ obj.updated }}<br/>
     {{ obj.id }}<br/>
 {% endfor %}
 
+<<<<<<< HEAD
 {% endblock content %}
+=======
+
+{% endblock content%}
+>>>>>>> fixed_delete_view
