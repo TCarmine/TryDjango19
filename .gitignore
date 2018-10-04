@@ -42,3 +42,7 @@ utili.txt
 *.css.map
 *.sass.map
 *.scss.map
+
+## exclude collected static file
+
+/static_cdn
