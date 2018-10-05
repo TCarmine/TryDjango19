@@ -26,7 +26,9 @@ def  post_list(request):
 
     paginator = Paginator(queryset_list, 5) # Show 25 contacts per page
 
-    page = request.GET.get('page')
+    page_request = "page"
+
+    page = request.GET.get(page_request)
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:
@@ -38,7 +40,8 @@ def  post_list(request):
 
     context={
          "object_list":queryset,
-               "title":"List"
+         "title":"List",
+         "page_request":page_request
     }
     # if request.user.is_authenticated():
     #         context={
