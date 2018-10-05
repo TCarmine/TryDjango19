@@ -46,3 +46,7 @@ utili.txt
 ## exclude collected static file
 
 /static_cdn
+/media_cdn
+
+#exclude migrations
+src/posts/migrations
