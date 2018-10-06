@@ -49,4 +49,4 @@ utili.txt
 /media_cdn
 
 #exclude migrations
-src/posts/migrations
+/src/posts/migrations
