@@ -14,7 +14,8 @@ post_delete,
 urlpatterns = [
     url(r'^$', post_list, name='list'),
     url(r'^create/$',  "posts.views.post_create"),
-    url(r'^(?P<id>\d+)/$', post_detail, name='detail'),
-    url(r'^(?P<id>\d+)/edit/$', post_update, name='update'),
+    #url(r'^(?P<slug>\d+)/$', post_detail, name='detail'),
+    url(r'^(?P<slug>[\w-]+)/$', post_detail, name='detail'),
+    url(r'^(?P<slug>[\w-]+)/edit/$', post_update, name='update'),
     url(r'^(?P<id>\d+)/delete/$', post_delete, name='delete'),
 ]
