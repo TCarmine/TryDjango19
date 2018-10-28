@@ -50,3 +50,6 @@ utili.txt
 
 #exclude migrations
 /src/posts/migrations
+
+#exclude errors folder
+/errors
