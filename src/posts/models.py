@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 #in order to take an action before the model is saved
@@ -13,6 +14,7 @@ def upload_location( instance, filename):
 
 # Create your models here.
 class Post(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
     title = models.CharField(max_length=120)
     #once introduced the db need to be recreated
     slug = models.SlugField(unique = True)
