@@ -16,9 +16,15 @@
 {{ instance.content|truncatechars:20| urlify }}<br/>
 
 
+
+
 {{ share_string }}
 
 {{ instance.content|linebreaks }}<br>
+
+<div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5"></div>
+
+<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
 
 <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
 Facebook
