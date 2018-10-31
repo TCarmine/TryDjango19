@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect, Http404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+from django.utils import timezone
 from .forms import PostForm
 from .models import Post
 
@@ -25,9 +26,10 @@ def  post_create(request):
     return render(request, "post_form.html", context)
 
 def  post_list(request):
-    queryset_list = Post.objects.all() #.order_by("-timestamp")
+    #.filter(draft=False) show only posts that are been created after have add draft
+    queryset_list = Post.objects.filter(publish__lte=timezone.now()) #.all() #.order_by("-timestamp")
 
-    paginator = Paginator(queryset_list, 5) # Show 25 contacts per page
+    paginator = Paginator(queryset_list, 5) # Show 5 contacts per page
 
     page_request = "page"
 
