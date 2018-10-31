@@ -26,10 +26,12 @@ def  post_create(request):
     return render(request, "post_form.html", context)
 
 def  post_list(request):
+    today = timezone.now().date()
     # Post.objects.filter(publish__lte=timezone.now())
     #.filter(draft=False) show only posts that are been created after have add draft
     queryset_list = Post.objects.active() #.order_by("-timestamp")
-
+    if request.user.is_staff or request.user.is_superuser:
+        queryset_list = Post.objects.all()
     paginator = Paginator(queryset_list, 5) # Show 5 contacts per page
 
     page_request = "page"
@@ -47,7 +49,8 @@ def  post_list(request):
     context={
          "object_list":queryset,
          "title":"List",
-         "page_request":page_request
+         "page_request":page_request,
+         "today":today,
     }
     # if request.user.is_authenticated():
     #         context={
@@ -63,6 +66,9 @@ def  post_list(request):
 def  post_detail(request, slug=None):
     # instance = Post.objects.get(id=1)
     instance = get_object_or_404(Post, slug=slug)
+    if instance.publish >timezone.now().date() or instance.draft:
+        if not request.user.is_staff or not request.user.is_superuser:
+           raise Http404
     share_string = quote_plus(instance.content)
     context={
     "title": instance.title,
