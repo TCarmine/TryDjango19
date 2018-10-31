@@ -5,7 +5,8 @@ from django.core.urlresolvers import reverse
 from django.db import models
 #in order to take an action before the model is saved
 from django.db.models.signals import pre_save
-
+#this in oder to put a default in DateField
+from django.utils.timezone import now
 from django.utils.text import slugify
 
 
@@ -26,7 +27,7 @@ class Post(models.Model):
     width_field = models.IntegerField(default=0)
     content = models.TextField()
     draft = models.BooleanField(default=False)
-    publish = models.DateField(auto_now= False, auto_now_add=False)
+    publish = models.DateField(auto_now=False, auto_now_add=False, default=now)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField (auto_now=False, auto_now_add=True)
 
