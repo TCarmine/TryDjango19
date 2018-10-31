@@ -26,8 +26,9 @@ def  post_create(request):
     return render(request, "post_form.html", context)
 
 def  post_list(request):
+    # Post.objects.filter(publish__lte=timezone.now())
     #.filter(draft=False) show only posts that are been created after have add draft
-    queryset_list = Post.objects.filter(publish__lte=timezone.now()) #.all() #.order_by("-timestamp")
+    queryset_list = Post.objects.active() #.order_by("-timestamp")
 
     paginator = Paginator(queryset_list, 5) # Show 5 contacts per page
 

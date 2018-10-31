@@ -6,8 +6,14 @@ from django.db import models
 #in order to take an action before the model is saved
 from django.db.models.signals import pre_save
 #this in oder to put a default in DateField
+from django.utils import timezone
 from django.utils.timezone import now
 from django.utils.text import slugify
+
+
+class PostManager(models.Manager):
+    def active(self,*args,**kwargs):
+        return super(PostManager,self).filter(draft=False).filter(publish__lte=timezone.now())
 
 
 def upload_location( instance, filename):
@@ -30,6 +36,8 @@ class Post(models.Model):
     publish = models.DateField(auto_now=False, auto_now_add=False, default=now)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField (auto_now=False, auto_now_add=True)
+
+    objects = PostManager()
 
     #Python 2.7
     def __unicode__(self):
