@@ -2,6 +2,8 @@ from urllib import quote_plus
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect, Http404
+
+from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.utils import timezone
@@ -32,6 +34,8 @@ def  post_list(request):
     queryset_list = Post.objects.active() #.order_by("-timestamp")
     if request.user.is_staff or request.user.is_superuser:
         queryset_list = Post.objects.all()
+    # this is for the search posts
+
     paginator = Paginator(queryset_list, 5) # Show 5 contacts per page
 
     page_request = "page"
@@ -107,3 +111,15 @@ def  post_delete(request, slug=None):
     instance.delete()
     messages.success(request,"Post successful deleted")
     return redirect("posts:list")
+
+def search(request):
+   template = "post_list.html"
+   query = request.GET.get("q")
+   results = Post.objects.filter(Q(title=query))
+   # pages = pagination(request, results, num=1)
+   #
+   # context = {
+   #    'items': pages[0],
+   #    'page_range': pages[1],
+   # }
+   return render(request,template)

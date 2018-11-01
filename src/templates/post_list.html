@@ -5,6 +5,11 @@
 
 <div class='col-sm-6 col-sm-offset-3'>
   <h1>{{title}}</h1>
+<form method="GET" action="{% url 'posts:search' %}">
+  <input type="text" name="q" placeholder="Search Posts" value='{{ request.GET.q }}'/>
+  <input type="submit" value="Search"/>
+</form>
+
 {#  this is a comment in django <a href='{% url "posts:detail" id=obj.id %}'></a><br/> #}
 
 
