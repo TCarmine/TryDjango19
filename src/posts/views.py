@@ -36,6 +36,9 @@ def  post_list(request):
         queryset_list = Post.objects.all()
     # this is for the search posts
 
+    query = request.GET.get("q")
+    if query:
+        queryset_list = Post.objects.filter(Q(title__icointains=query))
     paginator = Paginator(queryset_list, 5) # Show 5 contacts per page
 
     page_request = "page"
@@ -56,6 +59,7 @@ def  post_list(request):
          "page_request":page_request,
          "today":today,
     }
+    template = "post_list.html"
     # if request.user.is_authenticated():
     #         context={
     #                 "title":"My user List"
@@ -64,7 +68,7 @@ def  post_list(request):
     #     context={
     #     "title":"List"
     #     }
-    return render(request,"post_list.html",context)
+    return render(request, template, context)
 
 
 def  post_detail(request, slug=None):
@@ -112,14 +116,14 @@ def  post_delete(request, slug=None):
     messages.success(request,"Post successful deleted")
     return redirect("posts:list")
 
-def search(request):
-   template = "post_list.html"
-   query = request.GET.get("q")
-   results = Post.objects.filter(Q(title=query))
-   # pages = pagination(request, results, num=1)
-   #
-   # context = {
-   #    'items': pages[0],
-   #    'page_range': pages[1],
-   # }
-   return render(request,template)
+# def search(request):
+#    template = "post_list.html"
+#    query = request.GET.get("q")
+#    results = Post.objects.filter(Q(title__icointains=query))
+#    # pages = pagination(request, results, num=1)i
+#    #
+#    # context = {
+#    #    'items': pages[0],
+#    #    'page_range': pages[1],
+#    # }
+#    return render(request,template)
