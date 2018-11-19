@@ -2,8 +2,8 @@ from urllib import quote_plus
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect, Http404
-
 from django.db.models import Q
+
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.utils import timezone
@@ -36,13 +36,13 @@ def  post_list(request):
         queryset_list = Post.objects.all()
     # this is for the search posts
 
-    query = request.GET.get("q")
-    if query:
-        queryset_list = Post.objects.filter(Q(title__icointains=query))
+    # query = request.GET.get("q")
+    # if query:
+    #     queryset_list = Post.objects.filter(Q(title__icointains=query))
+
+    # pagination
     paginator = Paginator(queryset_list, 5) # Show 5 contacts per page
-
     page_request = "page"
-
     page = request.GET.get(page_request)
     try:
         queryset = paginator.page(page)
@@ -116,14 +116,14 @@ def  post_delete(request, slug=None):
     messages.success(request,"Post successful deleted")
     return redirect("posts:list")
 
-# def search(request):
-#    template = "post_list.html"
-#    query = request.GET.get("q")
-#    results = Post.objects.filter(Q(title__icointains=query))
-#    # pages = pagination(request, results, num=1)i
-#    #
-#    # context = {
-#    #    'items': pages[0],
-#    #    'page_range': pages[1],
-#    # }
-#    return render(request,template)
+def search(request):
+   template = "post_list.html"
+   query = request.GET.get("q")
+   results = Post.objects.filter(Q(title__cointains=query)| Q(body__contains=query))
+   pages = pagination(request, results, num=1)
+
+   context = {
+      'items': pages[0],
+      'page_range': pages[1],
+   }
+   return render(request,template, context)
