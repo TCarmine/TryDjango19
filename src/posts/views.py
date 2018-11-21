@@ -38,7 +38,12 @@ def  post_list(request):
 
     query = request.GET.get("q")
     if query:
-        queryset_list = Post.objects.filter(Q(title__icontains=query))
+        queryset_list = Post.objects.filter(
+                   Q(title__icontains=query) |
+                   Q(content__icontains=query)
+                   #Q(user__first_name_icontains=query)|
+                   #Q(user__last_name_icontains=query)
+                   ).distinct()
 
     # pagination
     paginator = Paginator(queryset_list, 5) # Show 5 contacts per page
