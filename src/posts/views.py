@@ -119,7 +119,7 @@ def  post_delete(request, slug=None):
 def search(request):
    template = "post_list.html"
    query = request.GET.get("q")
-   results = Post.objects.filter(Q(title__cointains=query)| Q(body__contains=query))
+   results = Post.objects.filter(Q(title__icontains=query)| Q(body__contains=query))
    pages = pagination(request, results, num=1)
 
    context = {
