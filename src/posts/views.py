@@ -36,9 +36,9 @@ def  post_list(request):
         queryset_list = Post.objects.all()
     # this is for the search posts
 
-    # query = request.GET.get("q")
-    # if query:
-    #     queryset_list = Post.objects.filter(Q(title__icointains=query))
+    query = request.GET.get("q")
+    if query:
+        queryset_list = Post.objects.filter(Q(title__icontains=query))
 
     # pagination
     paginator = Paginator(queryset_list, 5) # Show 5 contacts per page
@@ -116,14 +116,24 @@ def  post_delete(request, slug=None):
     messages.success(request,"Post successful deleted")
     return redirect("posts:list")
 
-def search(request):
-   template = "post_list.html"
-   query = request.GET.get("q")
-   results = Post.objects.filter(Q(title__icontains=query)| Q(body__contains=query))
-   pages = pagination(request, results, num=1)
-
-   context = {
-      'items': pages[0],
-      'page_range': pages[1],
-   }
-   return render(request,template, context)
+# def search(request):
+#    template = "post_list.html"
+#    query = request.GET.get("q")
+#    results = Post.objects.filter(Q(title__icontains=query)| Q(content__contains=query))
+#    #pages = pagination(request, results, num=1)
+#    paginator = Paginator(results, 5)
+#    page_request = "page"
+#    page = request.GET.get(page_request)
+#    try:
+#        queryset = paginator.page(page)
+#    except PageNotAnInteger:
+#        # If page is not an integer, deliver first page.
+#        queryset = paginator.page(1)
+#    except EmptyPage:
+#        # If page is out of range (e.g. 9999), deliver last page of results.
+#        queryset = paginator.page(paginator.num_pages)
+#
+#    context = {
+#        "page_request":page_request,
+#    }
+#    return render(request,template, context)
