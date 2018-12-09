@@ -24,7 +24,13 @@
 
 {{ share_string }}
 
-{{ instance.content|linebreaks }}<br>
+<div class="row">
+
+<div class="col-sm-12 content-markdown">
+    {{ instance.content|linebreaks }}<br>
+
+</div>
+</div>
 
 <small>
   {% if instance.draft %}
